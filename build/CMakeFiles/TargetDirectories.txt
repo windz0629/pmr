@@ -1,1 +1,0 @@
-/home/wangy/pcl_ws/src/gitupload/pmr/build/CMakeFiles/demo.dir

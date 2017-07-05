@@ -1,1 +1,0 @@
-/home/wangy/pcl_ws/src/pmr/tools/pcd_viz/build/CMakeFiles/pcd_viz.dir
