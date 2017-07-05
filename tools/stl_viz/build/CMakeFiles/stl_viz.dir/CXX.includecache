@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../../src/visualization/stl_visualizer.h
+iostream
+-
+
+/home/wangy/pcl_ws/src/pmr/tools/stl_viz/src/stl_viz.cpp
+visualization/stl_visualizer.h
+/home/wangy/pcl_ws/src/pmr/tools/stl_viz/src/visualization/stl_visualizer.h
+iostream
+-
+
