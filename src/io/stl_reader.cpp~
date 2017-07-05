@@ -1,0 +1,25 @@
+#include "stl_reader.h"
+#include "fstream"
+#include "iostream"
+
+namespace pmr
+{
+  static int STLReader::loadStlModel(std::string fileName, STLModel::Ptr & model)
+  {
+    std::ifstream stream;
+    stream.open(fileName.c_str(),std::ios::in);
+    if(!stream.is_open())
+    {
+      std::cout<<">>> Error: cannot open model file "
+        <<fileName<<std::endl;
+      return -1;
+    }
+
+    int stp=0;
+    while(!stream.eof())
+    {
+      std::string line="";
+      std::getline(stream,line);
+    }
+  }
+}
