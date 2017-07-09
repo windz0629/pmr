@@ -20,6 +20,8 @@ src/registration/icf/icf_pso.cpp
 src/registration/icf/distance_measurer.cpp
 src/registration/icf/min_dist_func.cpp
 
+src/filter/stl_downSampler.cpp
+
 src/math/particle.cpp 
 src/math/pose.cpp
 src/math/transform.cpp

@@ -54,19 +54,21 @@ int main(int argc, char** argv)
   std::cout<<">>> Sampled Cloud size: "<<filteredCloud->points.size()<<std::endl;
 
   //icf registration
+  /*
   boost::shared_ptr<pmr::IterativeClosestFace> icf(new pmr::IterativeClosestFace);
   icf->setReferenceModel(model);
   icf->setScenePointCloud(filteredCloud);
   icf->setIterationOuter(28);
   icf->setIterationInner(28);
   icf->setThresholds(0.5,5.0,8.0);
- 
-/*
+   */
+
+  //icf_pso registration
   boost::shared_ptr<pmr::IterativeClosestFace_PSO> icf(new pmr::IterativeClosestFace_PSO);
   icf->setReferenceModel(model);
   icf->setScenePointCloud(filteredCloud);
   icf->setThresholds(0.5,5.0,8.0);
-*/
+
   Eigen::Matrix4f init_transf=Eigen::Matrix4Xf::Identity(4,4);
   Eigen::Vector3f euler;
   euler(0)=0.0f;
