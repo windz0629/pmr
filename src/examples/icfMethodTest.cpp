@@ -9,7 +9,7 @@
 #include <pcl/common/transforms.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/filters/voxel_grid.h>
-
+#include "registration/icf/icf_pso.h"
 
 int main(int argc, char** argv)
 {
@@ -57,11 +57,16 @@ int main(int argc, char** argv)
   boost::shared_ptr<pmr::IterativeClosestFace> icf(new pmr::IterativeClosestFace);
   icf->setReferenceModel(model);
   icf->setScenePointCloud(filteredCloud);
-  icf->setIterationOuter(20);
-  icf->setIterationInner(20);
+  icf->setIterationOuter(28);
+  icf->setIterationInner(28);
   icf->setThresholds(0.5,5.0,8.0);
-  //std::cout<<"stub1"<<std::endl;
-
+ 
+/*
+  boost::shared_ptr<pmr::IterativeClosestFace_PSO> icf(new pmr::IterativeClosestFace_PSO);
+  icf->setReferenceModel(model);
+  icf->setScenePointCloud(filteredCloud);
+  icf->setThresholds(0.5,5.0,8.0);
+*/
   Eigen::Matrix4f init_transf=Eigen::Matrix4Xf::Identity(4,4);
   Eigen::Vector3f euler;
   euler(0)=0.0f;

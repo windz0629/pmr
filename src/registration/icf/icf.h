@@ -86,17 +86,15 @@ namespace pmr
       float
       calObjectiveValue (const Eigen::Matrix4f & mat_transf);
 
-      void 
+      virtual void 
       estimate (Eigen::Matrix4f & estimated_transf);
-      void
-      estimate_ex(Eigen::Matrix4f & estimated_transf);
   
       const Eigen::Vector3f
       matrix2euler (const Eigen::Matrix3f & mat_rotation);
       const Eigen::Matrix3f
       euler2matrix (const Eigen::Vector3f & euler_angle);
 
-    private:
+    protected:
       std::string model_file_;
       STLModel::Ptr model_;
       PointCloudConstPtr scene_point_cloud_;

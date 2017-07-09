@@ -81,7 +81,7 @@ float
       {
         dev_distances[id] = distPointPlane (dev_point, &dev_triangles[id*9]);
       }
-      else
+      if(1==2)
       {
         //dev_distances[id] = distPointPlane (dev_point, &dev_triangles[id*9]);
 

@@ -1,0 +1,7 @@
+#include "evaluate_fitness_func.h"
+namespace pmr
+{
+  EvaluateFitnessFunc::EvaluateFitnessFunc()
+  {
+  }
+}
