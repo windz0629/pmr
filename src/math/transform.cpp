@@ -73,8 +73,20 @@ namespace pmr
         Eigen::Matrix3f & rotMat,Eigen::Vector3f & position)
     {
       Eigen::Matrix4f transf=Eigen::Matrix4f::Identity(4,4);
-      transf.block(0,0,3,3)=rotMat;
-      transf.block(0,3,3,1)=position;
+      transf(0,0)=rotMat(0,0);
+      transf(0,1)=rotMat(0,1);
+      transf(0,2)=rotMat(0,2);
+      transf(1,0)=rotMat(1,0);
+      transf(1,1)=rotMat(1,1);
+      transf(1,2)=rotMat(1,2);
+      transf(2,0)=rotMat(2,0);
+      transf(2,1)=rotMat(2,1);
+      transf(2,2)=rotMat(2,2);
+      transf(0,3)=position(0);
+      transf(1,3)=position(1);
+      transf(2,3)=position(2);
+      //std::cout<<"position "<<position(0)<<" "<<position(1)<<" "<<position(2)<<std::endl;
+      //std::cout<<transf<<std::endl;
       return transf;
     }
 
@@ -97,7 +109,7 @@ namespace pmr
         Eigen::Vector3f& euler,Eigen::Vector3f& position)
     {
       euler=matrix2euler(transform.block(0,0,3,3));
-      position=transform.block(0,0,3,1);
+      position=transform.block(0,3,3,1);
     }
 
     /*

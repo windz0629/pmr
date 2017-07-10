@@ -13,16 +13,20 @@ namespace pmr
     public:
       typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
       typedef boost::shared_ptr<const PointCloud> PointCloudConstPtr;
+      typedef boost::shared_ptr<PointCloud> PointCloudPtr;
+      
       
       MinDistFunc();
       virtual void setModel(STLModel::Ptr & model);
-      virtual void setCloud(PointCloudConstPtr & cloud);
+      virtual void setCloud(PointCloudPtr & cloud);
       virtual void setThreshold(float threshold);
       virtual double evaluateFitness(math::Pose & pose);
+      void setCloudNormals(pcl::PointCloud<pcl::PointNormal>::Ptr & normals);
 
     private:
-      STLModel::Ptr _model;
-      PointCloudConstPtr _cloud;
+      STLModel::Ptr _model;//(new STLModel);
+      PointCloudConstPtr _cloud;//(new pcl::PointCloud<pcl::PointXYZ>);
+      pcl::PointCloud<pcl::PointNormal>::Ptr _cloudNormals;//(new pcl::PointCloud<pcl::PointNormal>);
       float threshold_valid_;
       DistanceMeasurer dist_measurer;
   };

@@ -6,8 +6,7 @@
 namespace pmr
 {
   DistanceMeasurer::DistanceMeasurer()
-  {
-  }
+  {}
 
   DistanceMeasurer::~DistanceMeasurer()
   {
@@ -76,12 +75,12 @@ float
       //if(!isPointNearTriangle(dev_point, &dev_triangles[id*9],normals.at(id)))
         //continue;
 
-      //if (isPointInTriangle (dev_point, &dev_triangles[id*9]))
-      if(isPointInTriangle(dev_point, &dev_triangles[id*9], normals.at(id)))
+      if (isPointInTriangle (dev_point, &dev_triangles[id*9]))
+      //if(isPointInTriangle(dev_point, &dev_triangles[id*9], normals.at(id)))
       {
         dev_distances[id] = distPointPlane (dev_point, &dev_triangles[id*9]);
       }
-      if(1==2)
+      else
       {
         //dev_distances[id] = distPointPlane (dev_point, &dev_triangles[id*9]);
 
@@ -153,6 +152,45 @@ float
     float min_distance = distPointTriangle(point,triangles_,normals_);
     return (min_distance);
   }
+
+  float DistanceMeasurer::calShortestNormalDistance(const float* normal)
+  {
+    //std::cout<<"calDist..."<<std::endl;
+    float min_distance=1000;
+    for(int id=0;id<num_triangles_;++id)
+    {
+      float tri_normal[3];
+      tri_normal[0]=(normals_.at(id))(0);
+      tri_normal[1]=(normals_.at(id))(1);
+      tri_normal[2]=(normals_.at(id))(2);
+      //std::cout<<"p1 "<<tri_normal[0]<<" "<<tri_normal[1]<<" "<<tri_normal[2]<<std::endl;
+      //std::cout<<"p2 "<<normal[0]<<" "<<normal[1]<<" "<<normal[2]<<std::endl;
+      //float dist=distPointPoint(normal,tri_normal);
+      float dist=sqrt(pow((tri_normal[0]-normal[0]),2)
+        +pow((tri_normal[1]-normal[1]),2)
+        +pow((tri_normal[2]-normal[2]),2));
+
+      //std::cout<<"dist "<<dist<<std::endl;
+      if(dist<min_distance)
+        min_distance=dist;
+    }
+    //std::cout<<"min_dist "<<min_distance<<std::endl;
+    return min_distance;
+  }
+
+
+  bool DistanceMeasurer:: isPointProjectionOnAnyTriangle(const float* point)
+   {
+      for(int id=0;id<num_triangles_;++id)
+      {
+        if(isPointInTriangle(point,&triangles_[id*9]))
+        {
+          return true;
+        }
+      }
+
+      return false;
+    }
   // Calculate the projected point on a plane.
   void
   DistanceMeasurer::pointProjectionOnPlane (const float * dev_point, const float * dev_triangle_vertices, float * dev_point_projection)

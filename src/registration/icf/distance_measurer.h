@@ -16,6 +16,8 @@ namespace pmr
       void setTriangles(const std::vector<std::vector<Eigen::Vector3f> > & triangles);
       void setNormals(const std::vector<Eigen::Vector3f> & normals);
       float calShortestDistance(const float* point);
+      float calShortestNormalDistance(const float* point);
+      bool isPointProjectionOnAnyTriangle(const float* point);
 
     private:
       int num_triangles_;

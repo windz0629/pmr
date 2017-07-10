@@ -12,6 +12,7 @@ namespace pmr
     public:
       IterativeClosestFace_PSO();
       void estimate (Eigen::Matrix4f & estimated_transf);
+
   };
 }
 #endif

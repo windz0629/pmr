@@ -24,5 +24,9 @@ namespace pmr
   void EvaluateFitnessFunc::setThreshold(double threshold)
   {
   }
+
+  void EvaluateFitnessFunc::setCloudNormals(pcl::PointCloud<pcl::PointNormal>::Ptr & normals)
+  {
+  }
   }
 }

@@ -57,7 +57,7 @@ namespace pmr
 
         Pose assignValue(Pose & value, const Pose & bound);
         void evaluateFitnessScore(int particle_id);
-        void updateVelocity(int particle_id);
+        void updateVelocity(int particle_id, int iteration);
         void updatePosition(int particle_id);
         double calPoseDistance(Pose & p1, Pose & p2);
         double calPointDistance(Pose & p1, Pose & p2);

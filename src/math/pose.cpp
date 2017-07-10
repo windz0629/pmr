@@ -197,7 +197,7 @@ namespace pmr
 
     std::ostream & operator<<(std::ostream & out, Pose & p)
     {
-      out<<std::endl<<p.x<<"  "<<p.y<<"  "<<p.z<<"  "
+      out<<std::endl<<"position:  "<<p.x<<"  "<<p.y<<"  "<<p.z<<"  euler: "
         <<p.phi<<"  "<<p.theta<<"  "<<p.psi<<std::endl;
 
       return out;
@@ -209,7 +209,11 @@ namespace pmr
       euler(0)=phi;
       euler(1)=theta;
       euler(2)=psi;
-      return transform::computeTransform(euler,_position);
+      Eigen::Vector3f pos;
+      pos(0)=x;
+      pos(1)=y;
+      pos(2)=z;
+      return transform::computeTransform(euler,pos);
     }
     
 

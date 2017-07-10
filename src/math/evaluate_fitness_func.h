@@ -14,6 +14,7 @@ namespace pmr
       virtual void setModel(STLModel::Ptr & model);
       virtual void setCloud(boost::shared_ptr<const pcl::PointCloud<pcl::PointXYZ> > &);
       virtual void setThreshold(double threshold);
+      virtual void setCloudNormals(pcl::PointCloud<pcl::PointNormal>::Ptr & normals);
       EvaluateFitnessFunc();
 
       private:

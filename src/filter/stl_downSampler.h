@@ -6,10 +6,17 @@ namespace pmr
   class STLDownSampler
   {
     public:
+      typedef std::vector<std::vector<Eigen::Vector3f> > TrianglesT;
+      typedef std::vector<Eigen::Vector3f> NormalT;
+
       STLDownSampler();
       STLModel::Ptr filter();
       void setModel(STLModel::Ptr & model);
-      void setFilterSize(double filterSize); 
+      void setRemainedTriangleSize(int size);
+
+    private:
+      STLModel::Ptr _model;
+      int _remainedTriangleSize;
   };
 }
 #endif

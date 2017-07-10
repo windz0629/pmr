@@ -69,7 +69,7 @@ namespace pmr
       {
         for(int id=0;id<population_size;++id)
         {
-          updateVelocity(id);
+          updateVelocity(id,i);
           updatePosition(id);
           evaluateFitnessScore(id);
         }
@@ -82,14 +82,15 @@ namespace pmr
       return sol;
     }
 
-    void Swarm::updateVelocity(int particle_id)
+    void Swarm::updateVelocity(int particle_id,int iteration)
     {
       Particle& par=particles.at(particle_id);
       
       double r1=rand()%100*0.01;
       double r2=rand()%100*0.01;
-      Pose tmp=0.729*(par.velocity+c1*r1*(par.pbest_pose-par.pose)
-        +c2*r2*(gbest_pose-par.pose));
+      double weight=0.729;//*(1.0-1.0/(float)iteration);
+      Pose tmp=weight*par.velocity+c1*r1*(par.pbest_pose-par.pose)
+        +c2*r2*(gbest_pose-par.pose);
       par.velocity=assignValue(tmp,limit_v);
       //par.velocity=tmp;
       //std::cout<<"par "<<particle_id<<" velocity: "<<par.velocity;
@@ -101,6 +102,9 @@ namespace pmr
       Pose tmp;
       tmp=par.pose+par.velocity;
       par.pose=assignValue(tmp,limit_p);
+      //par.pose.phi=0;
+      //par.pose.theta=0;
+      //par.pose.psi=0;
       //par.pose=tmp;
       //std::cout<<"par "<<particle_id<<" pose: "<<par.pose;
     }
@@ -151,10 +155,12 @@ namespace pmr
       if(fitnessScore<gbest_value)
       {
         //std::cout<<">>> find better position: "<<std::endl
-        //  <<"score: "<<fitnessScore<<par.pose<<std::endl;
+          //<<"score: "<<fitnessScore<<par.pose<<std::endl;
         gbest_value=fitnessScore;
         gbest_pose=par.pose;
       }
+
+      //std::cout<<"fitnessScore: "<<fitnessScore<<std::endl;
       
     }
 

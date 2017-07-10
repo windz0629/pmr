@@ -23,14 +23,6 @@ typedef pcl::FPFHEstimationOMP<PointT,PointNT,FeatureT> FeatureEstimationT;
 typedef pcl::PointCloud<FeatureT> FeatureCloudT;
 float leafsize=0.005;
 
-void printMat(Eigen::Matrix4f mat)
-{
-  std::cout<<mat(0,0)<<"   "<<mat(0,1)<<"   "<<mat(0,2)<<"   "<<mat(0,3)<<std::endl
-           <<mat(1,0)<<"   "<<mat(1,1)<<"   "<<mat(1,2)<<"   "<<mat(1,3)<<std::endl
-           <<mat(2,0)<<"   "<<mat(2,1)<<"   "<<mat(2,2)<<"   "<<mat(2,3)<<std::endl
-           <<mat(3,0)<<"   "<<mat(3,1)<<"   "<<mat(3,2)<<"   "<<mat(3,3)<<std::endl;
-}
-
 bool ransac_ia(pcl::PointCloud<pcl::PointXYZ>::Ptr sourceCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr targetCloud,Eigen::Matrix4f & transform)
 { 
     pcl::SampleConsensusInitialAlignment<PointT,PointT,FeatureT> align;
@@ -109,7 +101,6 @@ int main(int argc, char** argv)
   pmr::stl2pcdConverter converter;
   converter.setInputModel(model);
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloudData(new pcl::PointCloud<pcl::PointXYZ>);
- // if(converter.convert(cloudData)!=-1)
   
   if(converter.convert_voxelgrid(cloudData,leafsize)!=-1)
   {
@@ -158,7 +149,6 @@ int main(int argc, char** argv)
     std::cout<<">>> ICP converged"<<std::endl;
     std::cout<<">>> ICP fitness score: "<<icp.getFitnessScore()<<std::endl;
     std::cout<<">>> ICP final transform: "<<std::endl<<icp.getFinalTransformation()<<std::endl;
-    //printMat(transform);
   }
   else
   {

@@ -29,6 +29,7 @@ src/math/swarm.cpp
 src/math/evaluate_fitness_func.cpp
 
 src/examples/icfMethodTest.cpp
+#src/examples/pointMethodTest.cpp
 )
 
 add_executable(demo ${SRC_LIST})
