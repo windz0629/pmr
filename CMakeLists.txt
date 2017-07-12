@@ -19,6 +19,7 @@ src/registration/icf/icf.cpp
 src/registration/icf/icf_pso.cpp
 src/registration/icf/distance_measurer.cpp
 src/registration/icf/min_dist_func.cpp
+src/registration/mcn/mcn.cpp
 
 src/filter/stl_downSampler.cpp
 
