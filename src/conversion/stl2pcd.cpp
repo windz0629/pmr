@@ -17,7 +17,7 @@ namespace pmr
   //typedef pcl::PointXYZ pointT;
   //typedef pcl::PointCloud<pointT> pointCloudT;
   //typedef pointCloudT::Ptr pointCloudTPtr;
-  
+
   stl2pcdConverter::stl2pcdConverter():model(new STLModel)
   {
   }
@@ -48,6 +48,10 @@ namespace pmr
     this->model=model;
   }
 
+/**
+/* The implementation is not optimized,
+/* so calling this method may suffer slow speed
+**/
   int stl2pcdConverter::convert(pointCloudTPtr& cloudData)
   {
     try
@@ -76,7 +80,7 @@ namespace pmr
       return -1;
     }
     return 1;
-  } 
+  }
 
   int getMinMax3D(STLModel::Ptr & model, Eigen::Vector3f& min, Eigen::Vector3f& max)
   {
@@ -204,7 +208,7 @@ namespace pmr
     Eigen::Vector3f p5((i+1)*leafsize,j*leafsize,(k+1)*leafsize);
     Eigen::Vector3f p6((i+1)*leafsize,(j+1)*leafsize,k*leafsize);
     Eigen::Vector3f p7((i+1)*leafsize,(j+1)*leafsize,(k+1)*leafsize);
-    
+
     cube.push_back(p0);
     cube.push_back(p1);
     cube.push_back(p2);
@@ -226,7 +230,7 @@ namespace pmr
 
   const Eigen::Vector3f uniformRandom(const Eigen::Vector3f & min_bound, const Eigen::Vector3f max_bound)
   {
-    
+
     Eigen::Vector3f random_value;
     //boost::random_device rand_device;
     boost::uniform_real<float> distr_x(min_bound(0),max_bound(0));
@@ -235,7 +239,7 @@ namespace pmr
     random_value(0)=distr_x(rand_gen);
     random_value(1)=distr_y(rand_gen);
     random_value(2)=distr_z(rand_gen);
-    
+
 
     //random_value(0)=random_float(min_bound(0),max_bound(0));
     //random_value(1)=random_float(min_bound(1),max_bound(1));
@@ -365,7 +369,7 @@ namespace pmr
         }
       }
     }
-   */ 
+   */
   }
 
   /*

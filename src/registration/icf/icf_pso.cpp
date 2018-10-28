@@ -19,19 +19,19 @@ namespace pmr
     math::Pose maxVel(0.04, 0.04, 0.04, M_PI/60, M_PI/60, M_PI/60);
     sw.setSearchSpaceBound(minBound,maxBound);
     sw.setSearchSpeedBound(minVel,maxVel);
-    sw.setMaxIteration(40);
+    sw.setMaxIteration(200); // increase the max step will improve the result precision
     sw.setPopulationSize(20);
 
     //boost::shared_ptr<math::EvaluateFitnessFunc> minDistFuncPtr(new MinDistFunc);
     boost::shared_ptr<pcl::PointCloud<pcl::PointXYZ> > transCloud(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::transformPointCloud(*scene_point_cloud_,*transCloud, Eigen::Matrix4f::Identity(4,4));
-  
+
     pcl::NormalEstimationOMP<pcl::PointXYZ,pcl::PointNormal> nest;
     nest.setRadiusSearch (10.0*0.01);
     pcl::PointCloud<pcl::PointNormal>::Ptr sourceNormals(new pcl::PointCloud<pcl::PointNormal>);
     nest.setInputCloud (transCloud);
     nest.compute (*sourceNormals);
-    
+
     MinDistFunc* minDistFuncPtr=new MinDistFunc;
     minDistFuncPtr->setModel(this->model_);
     minDistFuncPtr->setCloud(transCloud);
@@ -40,7 +40,7 @@ namespace pmr
     sw.setEvaluateFitnessFunc(minDistFuncPtr);
     //sw.setEvaluateFitnessFunc((math::EvaluateFitnessFunc &)minDistFunc);
     math::PSOSolution sol=sw.compute();
-    
+
     std::cout<<"========================================"<<std::endl;
     std::cout<<"compute finished!"<<std::endl
       <<"gbest score "<<sol.gbest_value<<std::endl
@@ -51,4 +51,3 @@ namespace pmr
   }
 
 }
-

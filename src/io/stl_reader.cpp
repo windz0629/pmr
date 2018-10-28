@@ -26,8 +26,9 @@ namespace pmr
       
       if(line.find("facet normal")!=-1)
       {
+        boost::trim(line);
         std::vector<std::string> normalData;
-        boost::split(normalData,line,boost::is_any_of((" ")));
+        boost::split(normalData,line,boost::is_any_of((" ")),boost::token_compress_on);
         Eigen::Vector3f normal;
         normal[0]=boost::lexical_cast<float>(normalData[2]);
         normal[1]=boost::lexical_cast<float>(normalData[3]);
@@ -42,8 +43,9 @@ namespace pmr
           std::getline(stream,line);
           if(line.find("vertex")!=-1)
           {
+            boost::trim(line);
             std::vector<std::string> vertexData;
-            boost::split(vertexData,line,boost::is_any_of((" ")));
+            boost::split(vertexData,line,boost::is_any_of((" ")),boost::token_compress_on);
             Eigen::Vector3f point;
             point[0]=boost::lexical_cast<float>(vertexData[1]);
             point[1]=boost::lexical_cast<float>(vertexData[2]);

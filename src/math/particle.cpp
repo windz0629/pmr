@@ -1,6 +1,7 @@
 #include "particle.h"
 #include <boost/random.hpp>
 #include <iostream>
+#define DBL_MAX 99999
 namespace pmr
 {
   namespace math

@@ -1,5 +1,6 @@
 #include "swarm.h"
 #include <cmath>
+#define DBL_MAX 99999
 namespace pmr
 {
   namespace math
