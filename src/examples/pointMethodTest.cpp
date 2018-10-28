@@ -24,7 +24,7 @@ typedef pcl::PointCloud<FeatureT> FeatureCloudT;
 float leafsize=0.005;
 
 bool ransac_ia(pcl::PointCloud<pcl::PointXYZ>::Ptr sourceCloud, pcl::PointCloud<pcl::PointXYZ>::Ptr targetCloud,Eigen::Matrix4f & transform)
-{ 
+{
     pcl::SampleConsensusInitialAlignment<PointT,PointT,FeatureT> align;
     std::cout<<std::endl<<">>> Starting Ransac Initial Alignment..."<<std::endl;
 
@@ -37,6 +37,7 @@ bool ransac_ia(pcl::PointCloud<pcl::PointXYZ>::Ptr sourceCloud, pcl::PointCloud<
     nest.compute (*sourceNormals);
     nest.setInputCloud (targetCloud);
     nest.compute (*targetNormals);
+    std::cout<<">>> compute normals..."<<std::endl;
 
     FeatureCloudT::Ptr sourceCloud_features(new FeatureCloudT);
     FeatureCloudT::Ptr targetCloud_features(new FeatureCloudT);
@@ -63,6 +64,8 @@ bool ransac_ia(pcl::PointCloud<pcl::PointXYZ>::Ptr sourceCloud, pcl::PointCloud<
     //align.setSimilarityThreshold(0.01f);
     align.setMaxCorrespondenceDistance(2.0f*leaf);
     //align.setInlierFraction(0.025f);
+
+    std::cout<<">>> align setting..."<<std::endl;
 
     pcl::PointCloud<pcl::PointXYZ>::Ptr ransacAlignCloud(new pcl::PointCloud<pcl::PointXYZ>);
     align.align(*ransacAlignCloud);
@@ -101,7 +104,7 @@ int main(int argc, char** argv)
   pmr::stl2pcdConverter converter;
   converter.setInputModel(model);
   pcl::PointCloud<pcl::PointXYZ>::Ptr cloudData(new pcl::PointCloud<pcl::PointXYZ>);
-  
+
   if(converter.convert_voxelgrid(cloudData,leafsize)!=-1)
   {
     std::cout<<">>> convert from stl to pcd finished"<<std::endl;
@@ -169,7 +172,7 @@ int main(int argc, char** argv)
   viewer.addPointCloud<pcl::PointXYZ>(filtered_cloud,obs_cloud_color_h,"obsCloud");
   viewer.addPointCloud<pcl::PointXYZ>(ransacCloud,ransac_cloud_color_h,"ransacCloud");
   viewer.addPointCloud<pcl::PointXYZ>(finalCloud,icp_cloud_color_h,"icpCloud");
-  
+
   while(1)
   {
     if(!viewer.wasStopped())
@@ -177,5 +180,5 @@ int main(int argc, char** argv)
       viewer.spinOnce();
     }
   }
-  
+
 }

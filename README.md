@@ -2,8 +2,9 @@
 **PMR** (point model registration) aims to register a pointcloud to a CAD model (usually described in .stl format).
 
 This work is published in the article *"Estimation of Point Cloud Object Pose Using Particle Swarm Optimization (ICMVA 2018)"* [https://www.researchgate.net/publication/326165587]()
-
-<img src="https://github.com/windz0629/pmr/blob/master/register_results.png" width="300" div align="center"/>
+<div align=center>
+<img src="https://github.com/windz0629/pmr/blob/master/register_results.png" width="300"/>
+</div>
 
 ## Pipeline
 
@@ -11,7 +12,9 @@ This work is published in the article *"Estimation of Point Cloud Object Pose Us
 
  the `icf estimate` is accelerated by PSO algorithm:
 
- <img src="https://github.com/windz0629/pmr/blob/master/icf_pso_flowchart.png" width="300" div align="center"/>
+<div align=center>
+ <img src="https://github.com/windz0629/pmr/blob/master/icf_pso_flowchart.png" width="300" />
+</div>
 
 ## Architecture
 * **common**  -- defines data structure of stl model
@@ -85,11 +88,15 @@ The register precision and the computation time is a trade-off. If we increase t
 
 After 40 steps of iteration, the cuboid point cloud was aligned with an error.
 
-<img src="https://github.com/windz0629/pmr/blob/master/icf_reg_39step.png" width="300" div align="center"/>
+<div align=center>
+<img src="https://github.com/windz0629/pmr/blob/master/icf_reg_39step.png" width="300"/>
+</div>
 
 After 200 steps, the cuboid point cloud was aligned well.
 
-<img src="https://github.com/windz0629/pmr/blob/master/icf_reg_200step.png" width="300" div align="center"/>
+<div align=center>
+<img src="https://github.com/windz0629/pmr/blob/master/icf_reg_200step.png" width="300"/>
+</div>
 
 
 If you need to adjust the maximum step of iteration, here is an instruction:
@@ -111,11 +118,4 @@ void IterativeClosestFace_PSO::estimate(Eigen::Matrix4f & estimated_transf) {
 
   ...
 }
-```
-
-#### icp_demo
-`icp_demo` need 3 arguments: `stl_model_path`, `pcd_file_path` and `leafsize`
-```
-cd build
-./icp_demo ../models/cuboid.stl ../models/cuboid_30.pcd 0.05
 ```

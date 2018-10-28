@@ -13,5 +13,5 @@
 *.a
 
 *.*~
-/build
-**/**/build
+build
+/**/**/build

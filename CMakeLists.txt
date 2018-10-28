@@ -33,5 +33,5 @@ set(SRC_LIST
 add_executable(icf_demo src/examples/icfMethodTest.cpp ${SRC_LIST})
 target_link_libraries(icf_demo ${PCL_LIBRARIES} ${VTK_LIBRARIES})
 
-add_executable(icp_demo src/examples/pointMethodTest.cpp ${SRC_LIST})
-target_link_libraries(icp_demo ${PCL_LIBRARIES} ${VTK_LIBRARIES})
+#add_executable(icp_demo src/examples/pointMethodTest.cpp ${SRC_LIST})
+#target_link_libraries(icp_demo ${PCL_LIBRARIES} ${VTK_LIBRARIES})
