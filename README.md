@@ -2,7 +2,16 @@
 **PMR** (point model registration) aims to register a pointcloud to a CAD model (usually described in .stl format).
 
 This work is published in the article *"Estimation of Point Cloud Object Pose Using Particle Swarm Optimization (ICMVA 2018)"* [https://www.researchgate.net/publication/326165587]()
+
+![](https://github.com/windz0629/pmr/blob/master/register_results.png)
+
 ## Pipeline
+
+ `load stl model` --> `downsample stl triangles` --> `load pcd data` --> `filter cloud` --> `compute normal` --> `icf estimate`
+
+ the `icf estimate` is accelerated by PSO algorithm:
+
+ ![](https://github.com/windz0629/pmr/blob/master/icf_pso_flowchart.png)
 
 ## Architecture
 * **common**  -- defines data structure of stl model
@@ -11,7 +20,7 @@ This work is published in the article *"Estimation of Point Cloud Object Pose Us
 * **io**  -- load stl model from file
 * **math**  -- a set of algorithms, including pso(partical swarm optimization), and transform algorithm.
 * **registration** -- defines registration pipelines
-  * icf -- iterative closet face method (see [ref]())
+  * icf -- iterative closet face method
   * mcn -- mean cluster normals estimation method (todo)
 * **visualization** -- defines stl visualizer
 * **examples** -- demos of icf_pso method
@@ -65,12 +74,23 @@ make
 There is a `testdata` folder in `tools`, which is used for testing these tools.
 
 ### Run
-* icf_demo need 2 arguments: `stl_model_path` and `pcd_file_path`
+#### icf_demo
+
+`icf_demo` need 2 arguments: `stl_model_path` and `pcd_file_path`
 ```
 cd build
 ./icf_demo ../models/cuboid.stl ../models/cuboid_30.pcd
 ```
 The register precision and the computation time is a trade-off. If we increase the maximum iteration steps, we will ger better results, meanwhile, maybe we have to wait for the results over a cup of coffee.
+
+After 40 steps of iteration, the cuboid point cloud was aligned with an error.
+
+![](https://github.com/windz0629/pmr/blob/master/icf_reg_39step.png)
+
+After 200 steps, the cuboid point cloud was aligned well.
+
+![](https://github.com/windz0629/pmr/blob/master/icf_reg_200step.png)
+
 
 If you need to adjust the maximum step of iteration, here is an instruction:
 
@@ -91,4 +111,11 @@ void IterativeClosestFace_PSO::estimate(Eigen::Matrix4f & estimated_transf) {
 
   ...
 }
+```
+
+#### icp_demo
+`icp_demo` need 3 arguments: `stl_model_path`, `pcd_file_path` and `leafsize`
+```
+cd build
+./icp_demo ../models/cuboid.stl ../models/cuboid_30.pcd 0.05
 ```
